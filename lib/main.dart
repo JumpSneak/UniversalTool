@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
+import 'numberbasis.dart';
+import 'temperatures.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'UniversalTool',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -31,10 +36,95 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      darkTheme: ThemeData.dark(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/basisnumbers': (context) => BasisNumbers(),
+        '/temperatures': (context) => Temperatures(),
+      },
     );
   }
 }
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home"),
+        backgroundColor: Colors.blueAccent,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SizedBox(height: 300,),
+            SizedBox(
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 4, right: 4, bottom: 1, top: 1),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/basisnumbers');
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.onetwothree,
+                        size: 50,
+                      ),
+                      Spacer(),
+                      Text("Number Basis Converter"),
+                      Spacer()
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(fontSize: 18),
+                    elevation: 2,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 4, right: 4, bottom: 1, top: 1),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/temperatures');
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.thermostat,
+                        size: 30,
+                      ),
+                      Spacer(),
+                      Text("Temperature Converter"),
+                      Spacer()
+                    ],
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(fontSize: 18),
+                    elevation: 2,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
