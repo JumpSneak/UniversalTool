@@ -85,7 +85,8 @@ class _TemperaturesState extends State<Temperatures> {
                 const EdgeInsets.only(bottom: 15.0, left: 15.0, right: 15.0),
             child: TextField(
               keyboardType:
-                  TextInputType.numberWithOptions(signed: true, decimal: false),
+                  //TextInputType.text,
+                  TextInputType.numberWithOptions(signed: true, decimal: true),
               autocorrect: false,
               controller: widget._controller,
               maxLength: 18,
